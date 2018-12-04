@@ -11,7 +11,7 @@ namespace Day1
         {
             Solution1();
             Console.ReadKey();
-            //Solution2();
+            Solution2();
             Console.ReadKey();
         }
 
@@ -47,18 +47,35 @@ namespace Day1
 
         public static void Solution2()
         {
-            string[] lines = File.ReadAllLines("TextFile2.txt");
-            int sum = 0;
-            int i = 0;
-            HashSet<int> set = new HashSet<int>();
+            string[] lines = File.ReadAllLines("TextFile1.txt");
 
-            do
+            for (int i = 0; i < lines.Length; i++)
             {
-                sum += int.Parse(lines[i++ % lines.Length]);
-            }
-            while (set.Add(sum));
+                string str = lines[i];
 
-            Console.WriteLine(sum);
+                for (int j = i + 1; j < lines.Length; j++)
+                {
+                    string otherStr = lines[j];
+                    string result = "";
+
+                    for (int k = 0; k < str.Length; k++)
+                    {
+                        if (str[k] == otherStr[k])
+                        {
+                            result += str[k];
+                        }
+
+                        if (result.Length < k)
+                            break;
+                    }
+
+                    if (result.Length > 24)
+                    {
+                        Console.WriteLine(result);
+                        return;
+                    }
+                }
+            }
         }
     }
 }
